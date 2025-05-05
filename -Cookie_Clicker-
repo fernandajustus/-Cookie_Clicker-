@@ -7,16 +7,21 @@ export default function App() {
   const [clickPower, setClickPower] = useState(1);
   const [autoClickers, setAutoClickers] = useState(0);
 
+const[prestige, setPrestige] = useState (0);
+const [prestigeMultipler, setPrestigerMultiple] = useState (0);
+
   // Carrega os dados salvos ao iniciar o app
   useEffect(() => {
     const loadData = async () => {
       const savedCookies = await AsyncStorage.getItem('cookies');
       const savedClickPower = await AsyncStorage.getItem('clickPower');
       const savedAutoClickers = await AsyncStorage.getItem('autoClickers');
+ const savedPrestige = await asyncStorage.getItem  ('prestigeMultipler')
 
       if (savedCookies !== null) setCookies(parseInt(savedCookies));
       if (savedClickPower !== null) setClickPower(parseInt(savedClickPower));
       if (savedAutoClickers !== null) setAutoClickers(parseInt(savedAutoClickers));
+if (savedPrestige !== nu11) setPrestigerMultipler (parsetInt(savedPrestige));°
     };
     loadData();
   }, []);
@@ -30,7 +35,17 @@ export default function App() {
 
   const handleClick = () => {
     setCookies(cookies + clickPower);
+setCookies( prev + autoClickers * prestigeMultipler)
   };
+
+const handlePrestige = () => {
+if (cookies >= 1000){ 
+setCookies(0);
+setClickPower(1);
+setAutoClicker(0);
+setPrestigeMultiplier (prestigeMultiplier +1);
+ }
+};
 
   const buyUpgrade = () => {
     if (cookies >= 10) {
@@ -58,6 +73,7 @@ export default function App() {
       <Text style={styles.text}>Cookies: {cookies}</Text>
       <Text style={styles.text}>Poder de Clique: {clickPower}</Text>
       <Text style={styles.text}>Auto-Clickers: {autoClickers}</Text>
+    <Text style={styles.text}>prestio: {prestigioMultiplier}</Text>zzcccz4z3crfedeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedddve11111111111111111111111111
 
       <TouchableOpacity style={styles.button} onPress={handleClick}>
         <Text style={styles.buttonText}>Clique para ganhar cookies!</Text>
@@ -70,6 +86,11 @@ export default function App() {
       <TouchableOpacity style={styles.autoClickerButton} onPress={buyAutoClicker}>
         <Text style={styles.buttonText}>Comprar Auto-Clicker - 50 cookies</Text>
       </TouchableOpacity>
+<touchableOpacity style={styles prestigeButton} onpress= {handlePrestige}>
+ <text tyle={styles.buttonText}>
+  prestigio (resetar para ganhar x{prestigeMultiplier +1}) -1000 cookies</text>
+</touchableOpacity>    
+
     </View>
   );
 }
